@@ -701,7 +701,7 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAzJvWRkv5TT
 const CORRECT_MUSIC_ORDER = ['mot', 'dragni', 'nevidimka'];
 const CORRECT_TIMELINE_ORDER = ['2', '5', '3', '4', '1'];
 const QUIZ_QUESTIONS_COUNT = 18;
-const POINTS_PER_QUIZ = 2.6;
+const POINTS_PER_QUIZ = 2.7;
 const POINTS_MUSIC = 22;
 const POINTS_TIMELINE = 30;
 // ============================================
@@ -832,7 +832,7 @@ radios.forEach(radio => { if (radio.checked) answered = true; });
 if (!answered && !firstUnanswered) { firstUnanswered = question; question.classList.add('unanswered'); }
 });
 if (firstUnanswered) {
-showError('⚠️ Ответьте на все вопросы!');
+showError('⚠️ Ответь на все вопросы!');
 firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
 return;
 }
