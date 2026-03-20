@@ -1,15 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Untitled</title>
-    
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -471,7 +460,7 @@
 </head>
 <body>
 
-<div id="error-toast" class="error-toast">⚠️ Ответьте на все вопросы!</div>
+<div id="error-toast" class="error-toast">⚠️ Ответь на все вопросы!</div>
 
 <div class="container">
     <!-- ЭТАП 1: Приветствие -->
@@ -490,11 +479,11 @@
             <h1 class="stage-title">🎂 25 Уровень</h1>
             <p class="stage-description">
                 Добро пожаловать в личный архив именинницы!<br><br>
-                Тебе предстоит проверить свои знания, восстановить хронологию и угадать музыкальные предпочтения.
+                Тебе предстоит проверить свои знания, восстановить хронологию и угадать музыкальные предпочтения.<br><br> Три человека с самыми точными ответами получат приз.
             </p>
         </div>
 
-        <input type="text" id="username" placeholder="Введите ваше имя" autocomplete="off">
+        <input type="text" id="username" placeholder="Представься" autocomplete="off">
         <button class="btn" onclick="goToQuiz()">Начать расследование</button>
     </div>
 
@@ -512,7 +501,7 @@
 
         <div class="stage-header">
             <h2 class="stage-title">📝 Викторина</h2>
-            <p class="stage-description">Отвечай честно — архив всё запоминает!</p>
+            <p class="stage-description">Отвечай правильно — архив всё запоминает!</p>
         </div>
 
         <div class="quiz-container" id="quiz-container">
@@ -520,65 +509,66 @@
                 <div class="question-block">
                     <span class="question-title">1. Правда ли, что я могу оставить родителей ночевать на улице?</span>
                     <div class="options">
-                        <label><input type="radio" name="q1" value="1"> Да ✅</label>
-                        <label><input type="radio" name="q1" value="0"> Нет</label>
+                        <label><input type="radio" name="q1" value="1"> Да</label>
+                        <label><input type="radio" name="q1" value="0"> Нет</label>                     
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">2. Правда ли, что я чуть не утонула в машине на Каме?</span>
+                    <span class="question-title">2. Правда ли, что я тонула на Каме, находясь в машине?</span>
                     <div class="options">
-                        <label><input type="radio" name="q2" value="1"> Да ✅</label>
-                        <label><input type="radio" name="q2" value="0"> Нет</label>
+                        <label><input type="radio" name="q2" value="0"> Да</label>
+                        <label><input type="radio" name="q2" value="1"> Нет</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">3. Правда ли, что я пошла ночью в школу?</span>
+                    <span class="question-title">3. Правда ли, что я в 2 часа ночи ушла в школу?</span>
                     <div class="options">
-                        <label><input type="radio" name="q3" value="1"> Да ✅</label>
-                        <label><input type="radio" name="q3" value="0"> Нет</label>
+                        <label><input type="radio" name="q3" value="0"> Да</label>
+                        <label><input type="radio" name="q3" value="1"> Нет</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">4. Правда ли, что на меня с мамой чуть не напал медведь?</span>
+                    <span class="question-title">4. Правда ли, что за мной с мамой бежал медведь?</span>
                     <div class="options">
-                        <label><input type="radio" name="q4" value="1"> Да ✅</label>
-                        <label><input type="radio" name="q4" value="0"> Нет</label>
+                        <label><input type="radio" name="q4" value="0"> Да</label>
+                        <label><input type="radio" name="q4" value="1"> Нет</label>
                     </div>
                 </div>
                 <div class="question-block">
                     <span class="question-title">5. Правда ли, что я каталась на водных лыжах?</span>
                     <div class="options">
-                        <label><input type="radio" name="q5" value="1"> Да ✅</label>
+                        <label><input type="radio" name="q5" value="1"> Да</label>
                         <label><input type="radio" name="q5" value="0"> Нет</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">6. Правда ли, что я отращиваю волосы для продажи?</span>
+                    <span class="question-title">6. Правда ли, что я гастролировала с театром?</span>
                     <div class="options">
-                        <label><input type="radio" name="q6" value="1"> Да ✅</label>
+                        <label><input type="radio" name="q6" value="1"> Да</label>
                         <label><input type="radio" name="q6" value="0"> Нет</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">7. Правда ли, что я гастролировала с театром?</span>
+                    <span class="question-title">7. Правда ли, что я пыталась сдать на права и у меня не получилось?</span>
                     <div class="options">
-                        <label><input type="radio" name="q7" value="1"> Да ✅</label>
-                        <label><input type="radio" name="q7" value="0"> Нет</label>
+                        <label><input type="radio" name="q7" value="0"> Да</label>
+                        <label><input type="radio" name="q7" value="1"> Нет</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">8. Была ли я на море?</span>
+                    <span class="question-title">8. Я отращиваю волосы на продажу. Какую длину я хочу продать?</span>
                     <div class="options">
-                        <label><input type="radio" name="q8" value="0"> Да</label>
-                        <label><input type="radio" name="q8" value="1"> Нет ✅</label>
+                        <label><input type="radio" name="q8" value="0"> 40</label>
+                        <label><input type="radio" name="q8" value="1"> 50</label>                           <label><input type="radio" name="q8" value="0"> 60</label>   
+                        <label><input type="radio" name="q8" value="0"> 65</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">9. Сколько я сменила мест жительства для учёбы?</span>
+                    <span class="question-title">9. Сколько мест жительства я сменила для посещения занятий в школе и институте?</span>
                     <div class="options">
+                        <label><input type="radio" name="q9" value="0"> 4</label>
                         <label><input type="radio" name="q9" value="0"> 6</label>
-                        <label><input type="radio" name="q9" value="0"> 8</label>
-                        <label><input type="radio" name="q9" value="1"> 9 ✅</label>
+                        <label><input type="radio" name="q9" value="1"> 9</label>
                         <label><input type="radio" name="q9" value="0"> 12</label>
                     </div>
                 </div>
@@ -587,14 +577,13 @@
                     <div class="options">
                         <label><input type="radio" name="q10" value="0"> 1</label>
                         <label><input type="radio" name="q10" value="0"> 3</label>
-                        <label><input type="radio" name="q10" value="1"> 6 ✅</label>
-                        <label><input type="radio" name="q10" value="0"> 10</label>
+                        <label><input type="radio" name="q10" value="1"> 6</label>
                     </div>
                 </div>
                 <div class="question-block">
                     <span class="question-title">11. Какой мой любимый цвет?</span>
                     <div class="options">
-                        <label><input type="radio" name="q11" value="1"> Зелёный ✅</label>
+                        <label><input type="radio" name="q11" value="1"> Зелёный</label>
                         <label><input type="radio" name="q11" value="0"> Чёрный</label>
                         <label><input type="radio" name="q11" value="0"> Бордовый</label>
                     </div>
@@ -602,47 +591,61 @@
                 <div class="question-block">
                     <span class="question-title">12. Какое моё нелюбимое занятие на работе?</span>
                     <div class="options">
-                        <label><input type="radio" name="q12" value="0"> Общаться с людьми</label>
-                        <label><input type="radio" name="q12" value="1"> Совершать звонки ✅</label>
-                        <label><input type="radio" name="q12" value="0"> Ходить на встречи</label>
+                        <label><input type="radio" name="q12" value="0"> Работать до 23:00</label>
+                        <label><input type="radio" name="q12" value="1"> Совершать звонки</label>
+                        <label><input type="radio" name="q12" value="0"> Ходить на встречи с руководителем</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <span class="question-title">13. Мой любимый режиссёр-аниматор?</span>
+                    <span class="question-title">13. Кто мой любимый режиссёр-аниматор? В скобочках указан один из примеров работ.</span>
                     <div class="options">
-                        <label><input type="radio" name="q13" value="1"> Хаяо Миядзаки ✅</label>
-                        <label><input type="radio" name="q13" value="0"> Макото Синкай</label>
-                        <label><input type="radio" name="q13" value="0"> Исао Такахата</label>
+                        <label><input type="radio" name="q13" value="1"> Хаяо Миядзаки (Ходячий замок)</label>
+                        <label><input type="radio" name="q13" value="0"> Макото Синкай (5 сантиметров в секунду)</label>
+                        <label><input type="radio" name="q13" value="0"> Исао Такахата (Могила светлячков)</label>
                     </div>
                 </div>
                 <div class="question-block">
                     <span class="question-title">14. Что я выберу: бежать с горы или в гору?</span>
                     <div class="options">
-                        <label><input type="radio" name="q14" value="1"> Бежать в гору ✅</label>
+                        <label><input type="radio" name="q14" value="1"> Бежать в гору</label>
                         <label><input type="radio" name="q14" value="0"> Бежать с горы</label>
                     </div>
                 </div>
                 <div class="question-block">
                     <span class="question-title">15. Какую первую машину я хочу?</span>
                     <div class="options">
-                        <label><input type="radio" name="q15" value="1"> Audi ✅</label>
-                        <label><input type="radio" name="q15" value="0"> LADA</label>
-                        <label><input type="radio" name="q15" value="0"> Haval</label>
+                        <label><input type="radio" name="q15" value="0"> Volkswagen Golf</label>
+                        <label><input type="radio" name="q15" value="0"> Mini Cooper</label>
+                        <label><input type="radio" name="q15" value="1"> Audi</label>
                     </div>
                 </div>
                 <div class="question-block">
                     <span class="question-title">16. В какой самой далёкой точке от Перми я была?</span>
                     <div class="options">
                         <label><input type="radio" name="q16" value="0"> Казань</label>
-                        <label><input type="radio" name="q16" value="0"> Екатеринбург</label>
-                        <label><input type="radio" name="q16" value="1"> Москва ✅</label>
+                        <label><input type="radio" name="q16" value="1"> Москва</label>
                         <label><input type="radio" name="q16" value="0"> Тюмень</label>
+                    </div>
+                </div>
+                              <div class="question-block">
+                    <span class="question-title">17. На какой максимальной высоте от земли я была?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q17" value="1"> 186м</label>
+                        <label><input type="radio" name="q17" value="0"> 204м</label>
+                        <label><input type="radio" name="q17" value="0"> 165м</label>
+                    </div>
+                </div>
+                              <div class="question-block">
+                    <span class="question-title">18. Была ли я на море?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q18" value="0"> Да</label>
+                        <label><input type="radio" name="q18" value="1"> Нет</label>
                     </div>
                 </div>
             </form>
         </div>
 
-        <button class="btn" onclick="validateAndGoToMusic()">Далее: Музыкальный тест</button>
+        <button class="btn" onclick="validateAndGoToMusic()">Далее: Музыкальные предпочтения</button>
         <button class="btn-back" onclick="goBackToIntro()">← Назад</button>
     </div>
 
@@ -659,12 +662,12 @@
         </div>
 
         <div class="stage-header">
-            <h2 class="stage-title">🎵 Музыкальный архив</h2>
+            <h2 class="stage-title">🎵 Музыкальный топ</h2>
             <p class="stage-description">Расположи исполнителей от самого любимого к менее любимому</p>
         </div>
 
         <div class="music-player">
-            <p class="music-instruction">Нажми на ▶, чтобы услышать пример. Порядок сверху вниз: 1-й — самый любимый</p>
+            <p class="music-instruction">Нажми на ▶, чтобы услышать музыкальный пример. Порядок сверху вниз: 1-й — самый любимый</p>
             <ul id="music-list">
                 <li class="artist-card" data-id="mot" data-preview="https://github.com/darkmoore-tech/birthday-music/raw/refs/heads/main/mot.mp3">
                     <button class="play-btn" onclick="togglePlay(this, event)">▶</button>
@@ -672,7 +675,7 @@
                 </li>
                 <li class="artist-card" data-id="dragni" data-preview="https://github.com/darkmoore-tech/birthday-music/raw/refs/heads/main/dragni.mp3">
                     <button class="play-btn" onclick="togglePlay(this, event)">▶</button>
-                    <span class="artist-name">Dragni</span>
+                    <span class="artist-name">Драгни</span>
                 </li>
                 <li class="artist-card" data-id="nevidimka" data-preview="https://github.com/darkmoore-tech/birthday-music/raw/refs/heads/main/nevidimka.mp3">
                     <button class="play-btn" onclick="togglePlay(this, event)">▶</button>
@@ -723,16 +726,16 @@
         </div>
 
         <div class="stage-header">
-            <h2 class="stage-title">📅 Линия времени</h2>
+            <h2 class="stage-title">📅 Хронология событий</h2>
             <p class="stage-description">Расставь ключевые события в правильном порядке (сверху = раньше)</p>
         </div>
 
         <ul id="timeline-list">
-            <li class="timeline-item" data-id="1">🎒 Первый раз пошла ночью в школу</li>
-            <li class="timeline-item" data-id="2">🌊 Поездка на Каму (почти утонула в машине)</li>
-            <li class="timeline-item" data-id="3">🎓 Получение диплома</li>
-            <li class="timeline-item" data-id="4">💼 Первая работа в KFC</li>
-            <li class="timeline-item" data-id="5">🎭 Гастроли с театром</li>
+            <li class="timeline-item" data-id="1">💸 Научилась откладывать деньги</li>
+            <li class="timeline-item" data-id="2">🤽‍♀️ Первый раз сходила в аквапарк</li>
+            <li class="timeline-item" data-id="3">🚗 Научилась ездить на машине</li>
+            <li class="timeline-item" data-id="4">💼 Получила диплом о высшем образовании</li>
+            <li class="timeline-item" data-id="5">🎮 Впервые сходила в ПК-клуб</li>
         </ul>
 
         <button class="btn" onclick="finishGame()">Завершить и отправить</button>
@@ -761,7 +764,7 @@
         <p>Твой итоговый результат:</p>
         <div class="result-score"><span id="final-score">0</span> / 100</div>
         <p style="font-size:13px; color:#666;">
-            🏆 Победитель будет объявлен на вечеринке!<br>
+            🏆 Победитель будет объявлен при встрече.<br>
             Все данные уже в архиве.
         </p>
 
@@ -781,9 +784,9 @@
     // КОНФИГУРАЦИЯ ИГРЫ
     // ============================================
     const CORRECT_MUSIC_ORDER = ['mot', 'dragni', 'nevidimka'];
-    const CORRECT_TIMELINE_ORDER = ['1', '2', '3', '4', '5'];
-    const QUIZ_QUESTIONS_COUNT = 16;
-    const POINTS_PER_QUIZ = 3;
+    const CORRECT_TIMELINE_ORDER = ['2', '5', '3', '4', '1'];
+    const QUIZ_QUESTIONS_COUNT = 18;
+    const POINTS_PER_QUIZ = 2.67;
     const POINTS_MUSIC = 22;
     const POINTS_TIMELINE = 30;
     
@@ -1048,8 +1051,4 @@
     document.getElementById('quiz-form').addEventListener('submit', (e) => e.preventDefault());
 </script>
 </body>
-</html>
-    
-  </body>
-  
 </html>
