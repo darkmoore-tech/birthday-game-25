@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>25 Уровень: Архив Именинницы</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --primary: #ffd700;
+            --primary-glow: rgba(255, 215, 0, 0.4);
+            --text: #ffffff;
+            --text-secondary: #aaaaaa;
+            --success: #4caf50;
+            --accent-purple: #9c27b0;
+            --error: #f44336;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            text-align: center;
+            display: none;
+            animation: slideUp 0.4s ease;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .card.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 var(--primary-glow); }
+            50% { box-shadow: 0 0 0 15px transparent; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .stage-header {
+            margin-bottom: 20px;
+        }
+
+        .stage-title {
+            font-size: 22px;
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .stage-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent-purple));
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        h1 { 
+            color: var(--primary); 
+            margin: 0 0 15px 0; 
+            font-size: 26px;
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        p { color: var(--text-secondary); line-height: 1.5; margin: 0 0 20px 0; }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid #333;
+            background: #2a2a2a;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus { border-color: var(--primary); }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, #ffb300 100%);
+            color: #000;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 15px;
+        }
+
+        .btn:active { transform: scale(0.98); }
+        .btn:disabled { background: #555; cursor: not-allowed; }
+
+        .btn-back {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid #444;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .btn-back:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-back:active { transform: scale(0.98); }
+
+        .quiz-container {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-container::-webkit-scrollbar { width: 4px; }
+        .quiz-container::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
+
+        .question-block {
+            text-align: left;
+            margin-bottom: 18px;
+            background: #252535;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .question-block.unanswered {
+            border-left-color: var(--error);
+            background: #2a1a1a;
+            animation: shake 0.3s ease;
+        }
+        
+        .question-title { 
+            font-weight: 600; 
+            margin-bottom: 12px; 
+            display: block;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            background: #2a2a2a;
+            margin-bottom: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 14px;
+        }
+        
+        .options label:hover { background: #333; }
+        .options input { margin-right: 10px; accent-color: var(--primary); }
+
+        .music-player {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        
+        .music-instruction {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .music-instruction::before {
+            content: '🎧';
+        }
+        
+        .artist-card {
+            background: #2a2a2a;
+            margin-bottom: 10px;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+            transition: all 0.2s;
+        }
+        
+        .artist-card:active { cursor: grabbing; }
+        .artist-card:hover { background: #333; transform: translateX(3px); }
+        .artist-card::after {
+            content: '☰';
+            margin-left: auto;
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: none;
+            margin-right: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        
+        .play-btn:hover { 
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+        
+        .play-btn.playing { 
+            animation: pulse 1.5s infinite;
+            background: var(--success);
+        }
+        
+        .artist-name { 
+            font-weight: 600; 
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        #step-transition {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #step-transition::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            animation: rotate 4s linear infinite;
+            opacity: 0.3;
+        }
+        
+        .access-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: bounce 1s ease infinite;
+        }
+        
+        .access-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+        
+        .access-subtext {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+        
+        .typing-line {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            animation: typewriter 2s steps(30) forwards, blink 0.7s step-end infinite;
+            max-width: fit-content;
+            margin: 0 auto;
+        }
+
+        #timeline-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+        
+        .timeline-item {
+            background: #2a2a2a;
+            margin-bottom: 10px;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+            transition: all 0.2s;
+            font-size: 15px;
+        }
+        
+        .timeline-item:active { cursor: grabbing; }
+        .timeline-item:hover { background: #333; transform: translateX(3px); }
+        .timeline-item::after {
+            content: '☰';
+            margin-left: auto;
+            color: #555;
+            font-size: 20px;
+        }
+
+        .result-score {
+            font-size: 48px;
+            color: var(--primary);
+            font-weight: 800;
+            margin: 15px 0;
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            animation: fall 3s linear forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .error-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--error);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 2000;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(244, 67, 54, 0.4);
+            white-space: nowrap;
+        }
+
+        .error-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 380px) {
+            .container { padding: 10px; }
+            .card { padding: 20px 15px; }
+            h1 { font-size: 22px; }
+            .stage-title { font-size: 18px; }
+            .question-title { font-size: 14px; }
+            .options label { font-size: 13px; padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="error-toast" class="error-toast">⚠️ Ответь на все вопросы!</div>
+
+<div class="container">
+    <!-- ЭТАП 1: Приветствие -->
+    <div id="step-intro" class="card active">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Этап 1 из 5</span>
+                <span id="progress-text">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="stage-header">
+            <h1 class="stage-title">🎂 25 Уровень</h1>
+            <p class="stage-description">
+                Добро пожаловать в личный архив именинницы!<br><br>
+                Тебе предстоит проверить свои знания, восстановить хронологию и угадать музыкальные предпочтения.<br><br> Три человека с самыми точными ответами получат приз.
+            </p>
+        </div>
+
+        <input type="text" id="username" placeholder="Представься" autocomplete="off">
+        <button class="btn" onclick="goToQuiz()">Начать расследование</button>
+    </div>
+
+    <!-- ЭТАП 2: Викторина -->
+    <div id="step-quiz" class="card">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Этап 2 из 5</span>
+                <span id="progress-text-2">20%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar-2" style="width: 20%"></div>
+            </div>
+        </div>
+
+        <div class="stage-header">
+            <h2 class="stage-title">📝 Викторина</h2>
+            <p class="stage-description">Отвечай правильно — архив всё запоминает!</p>
+        </div>
+
+        <div class="quiz-container" id="quiz-container">
+            <form id="quiz-form">
+                <div class="question-block">
+                    <span class="question-title">1. Правда ли, что я могу оставить родителей ночевать на улице?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="1"> Да</label>
+                        <label><input type="radio" name="q1" value="0"> Нет</label>                     
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">2. Правда ли, что я тонула на Каме, находясь в машине?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="0"> Да</label>
+                        <label><input type="radio" name="q2" value="1"> Нет</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">3. Правда ли, что я в 2 часа ночи ушла в школу?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="0"> Да</label>
+                        <label><input type="radio" name="q3" value="1"> Нет</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">4. Правда ли, что за мной с мамой бежал медведь?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="0"> Да</label>
+                        <label><input type="radio" name="q4" value="1"> Нет</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">5. Правда ли, что я каталась на водных лыжах?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="1"> Да</label>
+                        <label><input type="radio" name="q5" value="0"> Нет</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">6. Правда ли, что я гастролировала с театром?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="1"> Да</label>
+                        <label><input type="radio" name="q6" value="0"> Нет</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">7. Правда ли, что я пыталась сдать на права и у меня не получилось?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="0"> Да</label>
+                        <label><input type="radio" name="q7" value="1"> Нет</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">8. Я отращиваю волосы на продажу. Какую длину я хочу продать?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="0"> 40</label>
+                        <label><input type="radio" name="q8" value="1"> 50</label>                           <label><input type="radio" name="q8" value="0"> 60</label>   
+                        <label><input type="radio" name="q8" value="0"> 65</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">9. Сколько мест жительства я сменила для посещения занятий в школе и институте?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="0"> 4</label>
+                        <label><input type="radio" name="q9" value="0"> 6</label>
+                        <label><input type="radio" name="q9" value="1"> 9</label>
+                        <label><input type="radio" name="q9" value="0"> 12</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">10. В скольких KFC Перми я работала?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="0"> 1</label>
+                        <label><input type="radio" name="q10" value="0"> 3</label>
+                        <label><input type="radio" name="q10" value="1"> 6</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">11. Какой мой любимый цвет?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q11" value="1"> Зелёный</label>
+                        <label><input type="radio" name="q11" value="0"> Чёрный</label>
+                        <label><input type="radio" name="q11" value="0"> Бордовый</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">12. Какое моё нелюбимое занятие на работе?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q12" value="0"> Работать до 23:00</label>
+                        <label><input type="radio" name="q12" value="1"> Совершать звонки</label>
+                        <label><input type="radio" name="q12" value="0"> Ходить на встречи с руководителем</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">13. Кто мой любимый режиссёр-аниматор? В скобочках указан один из примеров работ.</span>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="1"> Хаяо Миядзаки (Ходячий замок)</label>
+                        <label><input type="radio" name="q13" value="0"> Макото Синкай (5 сантиметров в секунду)</label>
+                        <label><input type="radio" name="q13" value="0"> Исао Такахата (Могила светлячков)</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">14. Что я выберу: бежать с горы или в гору?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="1"> Бежать в гору</label>
+                        <label><input type="radio" name="q14" value="0"> Бежать с горы</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">15. Какую первую машину я хочу?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q15" value="0"> Volkswagen Golf</label>
+                        <label><input type="radio" name="q15" value="0"> Mini Cooper</label>
+                        <label><input type="radio" name="q15" value="1"> Audi</label>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <span class="question-title">16. В какой самой далёкой точке от Перми я была?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q16" value="0"> Казань</label>
+                        <label><input type="radio" name="q16" value="1"> Москва</label>
+                        <label><input type="radio" name="q16" value="0"> Тюмень</label>
+                    </div>
+                </div>
+                              <div class="question-block">
+                    <span class="question-title">17. На какой максимальной высоте от земли я была?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q17" value="1"> 186м</label>
+                        <label><input type="radio" name="q17" value="0"> 204м</label>
+                        <label><input type="radio" name="q17" value="0"> 165м</label>
+                    </div>
+                </div>
+                              <div class="question-block">
+                    <span class="question-title">18. Была ли я на море?</span>
+                    <div class="options">
+                        <label><input type="radio" name="q18" value="0"> Да</label>
+                        <label><input type="radio" name="q18" value="1"> Нет</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <button class="btn" onclick="validateAndGoToMusic()">Далее: Музыкальные предпочтения</button>
+        <button class="btn-back" onclick="goBackToIntro()">← Назад</button>
+    </div>
+
+    <!-- ЭТАП 3: Музыкальный плейлист -->
+    <div id="step-music" class="card">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Этап 3 из 5</span>
+                <span id="progress-text-3">40%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar-3" style="width: 40%"></div>
+            </div>
+        </div>
+
+        <div class="stage-header">
+            <h2 class="stage-title">🎵 Музыкальный топ</h2>
+            <p class="stage-description">Расположи исполнителей от самого любимого к менее любимому</p>
+        </div>
+
+        <div class="music-player">
+            <p class="music-instruction">Нажми на ▶, чтобы услышать музыкальный пример. Порядок сверху вниз: 1-й — самый любимый</p>
+            <ul id="music-list">
+                <li class="artist-card" data-id="mot" data-preview="https://github.com/darkmoore-tech/birthday-music/raw/refs/heads/main/mot.mp3">
+                    <button class="play-btn" onclick="togglePlay(this, event)">▶</button>
+                    <span class="artist-name">Мот</span>
+                </li>
+                <li class="artist-card" data-id="dragni" data-preview="https://github.com/darkmoore-tech/birthday-music/raw/refs/heads/main/dragni.mp3">
+                    <button class="play-btn" onclick="togglePlay(this, event)">▶</button>
+                    <span class="artist-name">Драгни</span>
+                </li>
+                <li class="artist-card" data-id="nevidimka" data-preview="https://github.com/darkmoore-tech/birthday-music/raw/refs/heads/main/nevidimka.mp3">
+                    <button class="play-btn" onclick="togglePlay(this, event)">▶</button>
+                    <span class="artist-name">Невидимка</span>
+                </li>
+            </ul>
+        </div>
+
+        <button class="btn" onclick="goToTransition()">Подтвердить порядок</button>
+        <button class="btn-back" onclick="goBackToQuiz()">← Назад к викторине</button>
+    </div>
+
+    <!-- ЭТАП 4: Переходный экран -->
+    <div id="step-transition" class="card">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Этап 4 из 5</span>
+                <span id="progress-text-4">60%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar-4" style="width: 60%"></div>
+            </div>
+        </div>
+
+        <div class="stage-header">
+            <div class="access-icon">🔓</div>
+            <h2 class="stage-title access-text">ДОСТУП РАЗРЕШЁН</h2>
+            <p class="stage-description access-subtext">Загрузка следующего уровня архива...</p>
+        </div>
+
+        <div class="typing-line">Инициализация хроно-модуля</div>
+        
+        <div style="margin-top:25px; height:3px; background:#333; border-radius:2px; overflow:hidden;">
+            <div id="loading-bar" style="height:100%; background:var(--primary); width:0%; transition:width 0.1s;"></div>
+        </div>
+    </div>
+
+    <!-- ЭТАП 5: Таймлайн -->
+    <div id="step-timeline" class="card">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Этап 5 из 5</span>
+                <span id="progress-text-5">80%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar-5" style="width: 80%"></div>
+            </div>
+        </div>
+
+        <div class="stage-header">
+            <h2 class="stage-title">📅 Хронология событий</h2>
+            <p class="stage-description">Расставь ключевые события в правильном порядке (сверху = раньше)</p>
+        </div>
+
+        <ul id="timeline-list">
+            <li class="timeline-item" data-id="1">💸 Научилась откладывать деньги</li>
+            <li class="timeline-item" data-id="2">🤽‍♀️ Первый раз сходила в аквапарк</li>
+            <li class="timeline-item" data-id="3">🚗 Научилась ездить на машине</li>
+            <li class="timeline-item" data-id="4">💼 Получила диплом о высшем образовании</li>
+            <li class="timeline-item" data-id="5">🎮 Впервые сходила в ПК-клуб</li>
+        </ul>
+
+        <button class="btn" onclick="finishGame()">Завершить и отправить</button>
+        <button class="btn-back" onclick="goBackToMusic()">← Назад к музыке</button>
+    </div>
+
+    <!-- ЭТАП 6: Результаты -->
+    <div id="step-result" class="card">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>✅ Завершено</span>
+                <span id="progress-text-6">100%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar-6" style="width: 100%"></div>
+            </div>
+        </div>
+
+        <div class="stage-header">
+            <h1 class="stage-title">🎉 Миссия выполнена!</h1>
+            <p class="stage-description">
+                Спасибо за участие, <strong id="result-name"></strong>!
+            </p>
+        </div>
+
+        <p>Твой итоговый результат:</p>
+        <div class="result-score"><span id="final-score">0</span> / 100</div>
+        <p style="font-size:13px; color:#666;">
+            🏆 Победитель будет объявлен при встрече.<br>
+            Все данные уже в архиве.
+        </p>
+
+        <button class="btn" onclick="resetGame()">🔄 Пройти заново</button>
+    </div>
+</div>
+
+<audio id="audio-player" style="display:none;"></audio>
+
+<script>
+    // ============================================
+    // ⚙️ НАСТРОЙКИ (ВСТАВЬ ССЫЛКУ СЮДА!)
+    // ============================================
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAzJvWRkv5TT0GvtkttzVZ6UNeT7oNKahWutLex5aqN9bqCMBPWhps4mmviSKNGHsVkQ/exec';
+    
+    // ============================================
+    // КОНФИГУРАЦИЯ ИГРЫ
+    // ============================================
+    const CORRECT_MUSIC_ORDER = ['mot', 'dragni', 'nevidimka'];
+    const CORRECT_TIMELINE_ORDER = ['2', '5', '3', '4', '1'];
+    const QUIZ_QUESTIONS_COUNT = 18;
+    const POINTS_PER_QUIZ = 2.67;
+    const POINTS_MUSIC = 22;
+    const POINTS_TIMELINE = 30;
+    
+    // ============================================
+    // ПЕРЕМЕННЫЕ
+    // ============================================
+    let userName = '';
+    let quizScore = 0;
+    let musicScore = 0;
+    let timelineScore = 0;
+    let currentAudio = null;
+    let musicSortable = null;
+    let timelineSortable = null;
+    
+    // ============================================
+    // ИНИЦИАЛИЗАЦИЯ
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+        initSortable();
+    });
+    
+    function initSortable() {
+        const musicList = document.getElementById('music-list');
+        const timelineList = document.getElementById('timeline-list');
+        if (musicSortable) musicSortable.destroy();
+        if (timelineSortable) timelineSortable.destroy();
+        musicSortable = new Sortable(musicList, { animation: 150, ghostClass: 'sortable-ghost', dragClass: 'sortable-drag' });
+        timelineSortable = new Sortable(timelineList, { animation: 150, ghostClass: 'sortable-ghost', dragClass: 'sortable-drag' });
+    }
+    
+    // ============================================
+    // 🎵 АУДИО (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+    // ============================================
+    function togglePlay(btn, event) {
+        event.stopPropagation();
+        const audioPlayer = document.getElementById('audio-player');
+        const card = btn.closest('.artist-card');
+        const previewUrl = card.getAttribute('data-preview');
+        
+        // Если ссылка не заменена — показываем предупреждение
+        if (!previewUrl || previewUrl.includes('ССЫЛКА_НА')) {
+            alert('🎵 Сначала добавьте ссылки на MP3 файлы в код!');
+            return;
+        }
+        
+        // Если нажали на уже играющую кнопку — останавливаем
+        if (btn.classList.contains('playing')) {
+            audioPlayer.pause(); 
+            audioPlayer.currentTime = 0;
+            btn.classList.remove('playing'); 
+            btn.textContent = '▶'; 
+            currentAudio = null; 
+            return;
+        }
+        
+        // Останавливаем предыдущее воспроизведение
+        if (currentAudio) {
+            const prevBtn = document.querySelector('.play-btn.playing');
+            if (prevBtn) { 
+                prevBtn.classList.remove('playing'); 
+                prevBtn.textContent = '▶'; 
+            }
+        }
+        
+        // Сбрасываем обработчик onended перед новым воспроизведением
+        audioPlayer.onended = null;
+        
+        // Воспроизводим новый трек
+        audioPlayer.src = previewUrl;
+        audioPlayer.play().then(() => {
+            btn.classList.add('playing'); 
+            btn.textContent = '⏸'; 
+            currentAudio = btn;
+        }).catch(e => { 
+            console.error('Ошибка воспроизведения:', e);
+            btn.textContent = '⚠️'; 
+            setTimeout(() => btn.textContent = '▶', 1500); 
+        });
+        
+        // 🎯 ИСПРАВЛЕНИЕ: когда трек закончился естественно
+        audioPlayer.onended = function() {
+            btn.classList.remove('playing'); 
+            btn.textContent = '▶'; 
+            currentAudio = null;
+            audioPlayer.currentTime = 0;
+        };
+        
+        // Автостоп через 15 секунд (защита от зависания)
+        setTimeout(() => {
+            if (audioPlayer.src === previewUrl && !audioPlayer.paused) {
+                audioPlayer.pause(); 
+                audioPlayer.currentTime = 0;
+                btn.classList.remove('playing'); 
+                btn.textContent = '▶'; 
+                currentAudio = null;
+            }
+        }, 15000);
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.play-btn') && currentAudio) {
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.pause(); audioPlayer.currentTime = 0;
+            currentAudio.classList.remove('playing'); currentAudio.textContent = '▶'; currentAudio = null;
+        }
+    });
+    
+    // ============================================
+    // НАВИГАЦИЯ ВПЕРЁД
+    // ============================================
+    function showStep(stepId) {
+        document.querySelectorAll('.card').forEach(el => el.classList.remove('active'));
+        document.getElementById(stepId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function showError(message) {
+        const toast = document.getElementById('error-toast');
+        toast.textContent = message; toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function goToQuiz() {
+        const input = document.getElementById('username');
+        if (input.value.trim() === '') {
+            input.style.borderColor = 'var(--error)'; input.classList.add('unanswered');
+            setTimeout(() => { input.style.borderColor = '#333'; input.classList.remove('unanswered'); }, 2000);
+            return;
+        }
+        userName = input.value.trim();
+        showStep('step-quiz');
+    }
+
+    function validateAndGoToMusic() {
+        const form = document.getElementById('quiz-form');
+        const questions = form.querySelectorAll('.question-block');
+        let firstUnanswered = null;
+        questions.forEach(q => q.classList.remove('unanswered'));
+        questions.forEach((question) => {
+            const radios = question.querySelectorAll('input[type="radio"]');
+            let answered = false;
+            radios.forEach(radio => { if (radio.checked) answered = true; });
+            if (!answered && !firstUnanswered) { firstUnanswered = question; question.classList.add('unanswered'); }
+        });
+        if (firstUnanswered) {
+            showError('⚠️ Ответьте на все вопросы!');
+            firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        const formData = new FormData(form);
+        let correct = 0;
+        for (let pair of formData.entries()) { if (pair[1] === '1') correct++; }
+        quizScore = Math.round((correct / QUIZ_QUESTIONS_COUNT) * (POINTS_PER_QUIZ * QUIZ_QUESTIONS_COUNT));
+        showStep('step-music');
+    }
+
+    function goToTransition() {
+        const currentMusicOrder = Array.from(document.getElementById('music-list').children).map(li => li.getAttribute('data-id'));
+        let musicMatches = 0;
+        currentMusicOrder.forEach((id, index) => { if (id === CORRECT_MUSIC_ORDER[index]) musicMatches++; });
+        musicScore = Math.round((musicMatches / CORRECT_MUSIC_ORDER.length) * POINTS_MUSIC);
+        showStep('step-transition');
+        let progress = 0;
+        const loadingBar = document.getElementById('loading-bar');
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress >= 100) { progress = 100; clearInterval(interval); setTimeout(() => showStep('step-timeline'), 400); }
+            loadingBar.style.width = progress + '%';
+        }, 100);
+    }
+
+    function finishGame() {
+        const currentTimelineOrder = Array.from(document.getElementById('timeline-list').children).map(li => li.getAttribute('data-id'));
+        let timelineMatches = 0;
+        currentTimelineOrder.forEach((id, index) => { if (id === CORRECT_TIMELINE_ORDER[index]) timelineMatches++; });
+        timelineScore = Math.round((timelineMatches / CORRECT_TIMELINE_ORDER.length) * POINTS_TIMELINE);
+        const totalScore = quizScore + musicScore + timelineScore;
+        const btn = document.querySelector('#step-timeline .btn');
+        btn.textContent = '📤 Сохранение в архив...'; btn.disabled = true;
+        
+        sendDataToGoogleSheet(userName, quizScore, musicScore, timelineScore, totalScore)
+        .then(() => {
+            console.log('Данные успешно отправлены!');
+            document.getElementById('result-name').textContent = userName;
+            document.getElementById('final-score').textContent = totalScore;
+            createConfetti();
+            showStep('step-result');
+            btn.textContent = 'Завершить и отправить'; btn.disabled = false;
+        })
+        .catch((err) => {
+            console.error('Ошибка отправки:', err);
+            showError('❌ Ошибка сохранения. Попробуйте еще раз.');
+            btn.textContent = 'Попробовать снова'; btn.disabled = false;
+        });
+    }
+    
+    // ============================================
+    // НАВИГАЦИЯ НАЗАД
+    // ============================================
+    function goBackToIntro() {
+        showStep('step-intro');
+    }
+    
+    function goBackToQuiz() {
+        showStep('step-quiz');
+    }
+    
+    function goBackToMusic() {
+        showStep('step-music');
+    }
+    
+    // ============================================
+    // ОТПРАВКА ДАННЫХ
+    // ============================================
+    async function sendDataToGoogleSheet(name, quiz, music, timeline, total) {
+        const data = { name, quizScore: quiz, musicScore: music, timelineScore: timeline, totalScore: total };
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        return Promise.resolve('success');
+    }
+    
+    // ============================================
+    // СБРОС ИГРЫ
+    // ============================================
+    function resetGame() {
+        userName = ''; quizScore = 0; musicScore = 0; timelineScore = 0; currentAudio = null;
+        const audioPlayer = document.getElementById('audio-player');
+        audioPlayer.pause(); audioPlayer.currentTime = 0;
+        document.getElementById('quiz-form').reset();
+        document.querySelectorAll('.question-block').forEach(q => q.classList.remove('unanswered'));
+        document.getElementById('username').value = ''; document.getElementById('username').style.borderColor = '#333';
+        document.querySelectorAll('.progress-fill').forEach(bar => bar.style.width = '0%');
+        document.getElementById('progress-bar-2').style.width = '20%';
+        document.getElementById('progress-bar-3').style.width = '40%';
+        document.getElementById('progress-bar-4').style.width = '60%';
+        document.getElementById('progress-bar-5').style.width = '80%';
+        document.getElementById('progress-bar-6').style.width = '100%';
+        document.getElementById('loading-bar').style.width = '0%';
+        initSortable();
+        document.querySelectorAll('.confetti').forEach(c => c.remove());
+        showStep('step-intro');
+    }
+
+    function createConfetti() {
+        const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#9c27b0', '#2196f3'];
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confetti.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 4000);
+        }
+    }
+
+    document.getElementById('quiz-form').addEventListener('submit', (e) => e.preventDefault());
+</script>
+</body>
+</html>
