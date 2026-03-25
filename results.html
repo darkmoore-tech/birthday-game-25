@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏆 Результаты игры "25 Уровень"</title>
+<style>
+:root {
+--bg-color: #121212;
+--card-bg: #1e1e1e;
+--primary: #ffd700;
+--primary-glow: rgba(255, 215, 0, 0.4);
+--text: #ffffff;
+--text-secondary: #aaaaaa;
+--success: #4caf50;
+--accent-purple: #9c27b0;
+--silver: #c0c0c0;
+--bronze: #cd7f32;
+--quiz-color: #ffd700;
+--music-color: #e91e63;
+--timeline-color: #00bcd4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);
+color: var(--text);
+min-height: 100vh;
+padding: 20px;
+}
+.container { max-width: 800px; margin: 0 auto; }
+h1 {
+text-align: center;
+color: var(--primary);
+font-size: 32px;
+margin-bottom: 10px;
+text-shadow: 0 0 20px var(--primary-glow);
+}
+.subtitle {
+text-align: center;
+color: var(--text-secondary);
+margin-bottom: 30px;
+font-size: 14px;
+}
+.nav-tabs {
+display: flex;
+gap: 10px;
+margin-bottom: 30px;
+flex-wrap: wrap;
+justify-content: center;
+}
+.nav-tab {
+background: var(--card-bg);
+border: 2px solid #333;
+color: var(--text);
+padding: 12px 20px;
+border-radius: 25px;
+cursor: pointer;
+transition: all 0.3s;
+font-weight: 600;
+}
+.nav-tab:hover { border-color: var(--primary); color: var(--primary); }
+.nav-tab.active {
+background: var(--primary);
+color: #000;
+border-color: var(--primary);
+}
+.section { display: none; animation: fadeIn 0.5s; }
+.section.active { display: block; }
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.search-box {
+width: 100%;
+padding: 15px;
+border-radius: 12px;
+border: 2px solid #333;
+background: var(--card-bg);
+color: var(--text);
+font-size: 16px;
+margin-bottom: 20px;
+outline: none;
+}
+.search-box:focus { border-color: var(--primary); }
+.leaderboard {
+background: var(--card-bg);
+border-radius: 20px;
+padding: 20px;
+margin-bottom: 20px;
+}
+.leaderboard-item {
+display: flex;
+align-items: center;
+padding: 15px;
+margin-bottom: 10px;
+background: #252535;
+border-radius: 12px;
+transition: all 0.3s;
+cursor: pointer;
+position: relative;
+}
+.leaderboard-item:hover { 
+transform: translateX(5px);
+border: 1px solid var(--primary);
+}
+.rank {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 700;
+font-size: 18px;
+margin-right: 15px;
+flex-shrink: 0;
+}
+.rank-1 { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary-glow); }
+.rank-2 { background: var(--silver); color: #000; }
+.rank-3 { background: var(--bronze); color: #000; }
+.rank-4 { background: #9c27b0; color: #fff; }
+.rank-other { background: #333; color: var(--text-secondary); }
+.prize-icon {
+font-size: 20px;
+margin-left: 8px;
+animation: bounce 2s infinite;
+display: inline-block;
+}
+@keyframes bounce {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-5px); }
+}
+.player-info { flex: 1; }
+.player-name { 
+font-weight: 600; 
+font-size: 16px; 
+margin-bottom: 5px;
+display: flex;
+align-items: center;
+}
+.player-scores { font-size: 13px; color: var(--text-secondary); }
+.total-score {
+font-size: 24px;
+font-weight: 800;
+color: var(--primary);
+text-shadow: 0 0 10px var(--primary-glow);
+}
+.card {
+background: var(--card-bg);
+border-radius: 20px;
+padding: 30px;
+margin-bottom: 20px;
+text-align: center;
+border: 2px solid #333;
+position: relative;
+overflow: hidden;
+}
+.card.winner {
+border-color: var(--primary);
+box-shadow: 0 0 30px var(--primary-glow);
+}
+.card-title {
+font-size: 24px;
+color: var(--primary);
+margin-bottom: 20px;
+}
+.card-avatar {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 36px;
+margin: 0 auto 15px;
+}
+.card-name { font-size: 22px; font-weight: 700; margin-bottom: 15px; }
+.card-stats {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+margin: 20px 0;
+}
+.stat {
+background: #252535;
+padding: 15px;
+border-radius: 10px;
+}
+.stat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
+.stat-value { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.stat-bar {
+height: 6px;
+background: #333;
+border-radius: 3px;
+overflow: hidden;
+margin-top: 5px;
+}
+.stat-bar-fill {
+height: 100%;
+border-radius: 3px;
+transition: width 1s ease;
+}
+.bar-quiz { background: var(--quiz-color); }
+.bar-music { background: var(--music-color); }
+.bar-timeline { background: var(--timeline-color); }
+.card-message {
+font-style: italic;
+color: var(--text-secondary);
+margin-top: 15px;
+padding: 15px;
+background: #252535;
+border-radius: 10px;
+}
+.prize-notice {
+background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(156, 39, 176, 0.1));
+border: 2px solid var(--primary);
+border-radius: 12px;
+padding: 15px;
+margin-top: 20px;
+}
+.prize-notice-icon {
+font-size: 32px;
+margin-bottom: 10px;
+}
+.prize-notice-text {
+font-size: 14px;
+color: var(--text);
+font-weight: 600;
+}
+.back-btn-container {
+display: flex;
+justify-content: center;
+margin-bottom: 20px;
+}
+.back-btn {
+background: var(--card-bg);
+color: var(--text-secondary);
+border: 2px solid #444;
+padding: 12px 24px;
+border-radius: 50px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.back-btn:hover {
+border-color: var(--primary);
+color: var(--primary);
+transform: translateX(-5px);
+}
+.confetti {
+position: fixed;
+width: 10px;
+height: 10px;
+animation: fall 3s linear forwards;
+pointer-events: none;
+z-index: 1000;
+}
+@keyframes fall {
+to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.category-badge {
+display: inline-block;
+padding: 6px 12px;
+border-radius: 15px;
+font-size: 12px;
+font-weight: 600;
+margin-right: 8px;
+}
+.badge-quiz { background: rgba(255, 215, 0, 0.2); color: var(--quiz-color); border: 1px solid var(--quiz-color); }
+.badge-music { background: rgba(233, 30, 99, 0.2); color: var(--music-color); border: 1px solid var(--music-color); }
+.badge-timeline { background: rgba(0, 188, 212, 0.2); color: var(--timeline-color); border: 1px solid var(--timeline-color); }
+.category-card {
+background: var(--card-bg);
+border-radius: 20px;
+padding: 20px;
+margin-bottom: 20px;
+}
+.category-card h3 {
+color: var(--primary);
+margin-bottom: 15px;
+text-align: center;
+}
+.winner-item {
+display: flex;
+align-items: center;
+padding: 12px;
+margin-bottom: 8px;
+background: #252535;
+border-radius: 8px;
+}
+.info-notice {
+background: #252535;
+border-left: 4px solid var(--accent-purple);
+padding: 15px;
+border-radius: 8px;
+margin-top: 20px;
+text-align: left;
+}
+.info-notice-title {
+font-weight: 600;
+color: var(--primary);
+margin-bottom: 8px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.info-notice-text {
+font-size: 13px;
+color: var(--text-secondary);
+line-height: 1.5;
+}
+@media (max-width: 600px) {
+.card-stats { grid-template-columns: 1fr; }
+.leaderboard-item { flex-wrap: wrap; }
+.total-score { margin-top: 10px; width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🏆 Результаты игры</h1>
+<p class="subtitle">25 Уровень: Архив Именинницы</p>
+
+<div class="nav-tabs">
+<button class="nav-tab active" onclick="showSection('leaderboard')">📊 Топ игроков</button>
+<button class="nav-tab" onclick="showSection('categories')">🏅 По категориям</button>
+</div>
+
+<!-- СЕКЦИЯ: ТАБЛИЦА ЛИДЕРОВ -->
+<div id="leaderboard" class="section active">
+<input type="text" class="search-box" placeholder="🔍 Найти игрока по имени..." oninput="filterLeaderboard(this.value)">
+<div class="leaderboard" id="leaderboard-list"></div>
+</div>
+
+<!-- СЕКЦИЯ: КАРТОЧКА ИГРОКА -->
+<div id="player-card-section" class="section">
+<div class="back-btn-container">
+<button class="back-btn" onclick="showLeaderboard()">← Назад к таблице</button>
+</div>
+<div id="player-card-container"></div>
+</div>
+
+<!-- СЕКЦИЯ: КАТЕГОРИИ -->
+<div id="categories" class="section">
+<div class="category-card">
+<h3>🧠 Викторина</h3>
+<div id="quiz-winners"></div>
+</div>
+<div class="category-card">
+<h3>🎵 Музыка</h3>
+<div id="music-winners"></div>
+</div>
+<div class="category-card">
+<h3>📅 Хронология</h3>
+<div id="timeline-winners"></div>
+</div>
+</div>
+</div>
+
+<script>
+// ============================================
+// ДАННЫЕ ИЗ ТАБЛИЦЫ (АКТУАЛЬНЫЕ)
+// ============================================
+const playersData = [
+{ name: "Француз", quiz: 19, music: 7, timeline: 30, total: 56 },
+{ name: "Сонечка", quiz: 27, music: 22, timeline: 0, total: 49 },
+{ name: "УрысБаш", quiz: 27, music: 7, timeline: 12, total: 46 },
+{ name: "Покемон", quiz: 27, music: 7, timeline: 6, total: 40 },
+{ name: "Шкодница", quiz: 14, music: 22, timeline: 0, total: 36 },
+{ name: "Александра", quiz: 19, music: 7, timeline: 6, total: 32 },
+{ name: "Леха лысый 🧑", quiz: 19, music: 7, timeline: 0, total: 26 },
+{ name: "Малибу15", quiz: 14, music: 7, timeline: 0, total: 21 },
+{ name: "Пирог", quiz: 19, music: 0, timeline: 0, total: 19 }
+];
+
+// Максимальные баллы для расчёта процентов
+const MAX_QUIZ = 46.8;
+const MAX_MUSIC = 22;
+const MAX_TIMELINE = 30;
+const MAX_TOTAL = 100;
+
+// ============================================
+// ИНИЦИАЛИЗАЦИЯ
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+renderLeaderboard();
+renderCategories();
+});
+
+// ============================================
+// НАВИГАЦИЯ
+// ============================================
+function showSection(sectionId) {
+document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+if (sectionId === 'leaderboard' || sectionId === 'categories') {
+document.getElementById(sectionId).classList.add('active');
+event.target.classList.add('active');
+} else {
+document.getElementById(sectionId).classList.add('active');
+}
+window.scrollTo(0, 0);
+}
+
+function showLeaderboard() {
+document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+document.getElementById('leaderboard').classList.add('active');
+document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+document.querySelector('.nav-tab').classList.add('active');
+window.scrollTo(0, 0);
+}
+
+// ============================================
+// ТАБЛИЦА ЛИДЕРОВ
+// ============================================
+function renderLeaderboard(filter = '') {
+const sorted = [...playersData].sort((a, b) => b.total - a.total);
+const container = document.getElementById('leaderboard-list');
+container.innerHTML = '';
+
+const filtered = sorted.filter(p => 
+p.name.toLowerCase().includes(filter.toLowerCase())
+);
+
+filtered.forEach((player, index) => {
+const rank = index + 1;
+let rankClass, rankEmoji;
+
+if (rank === 1) { rankClass = 'rank-1'; rankEmoji = '🥇'; }
+else if (rank === 2) { rankClass = 'rank-2'; rankEmoji = '🥈'; }
+else if (rank === 3) { rankClass = 'rank-3'; rankEmoji = '🥉'; }
+else if (rank === 4) { rankClass = 'rank-4'; rankEmoji = '🎖'; }
+else { rankClass = 'rank-other'; rankEmoji = rank; }
+
+const item = document.createElement('div');
+item.className = 'leaderboard-item';
+item.onclick = () => showPlayerCard(player.name);
+
+// Иконка приза для топ-4 — теперь рядом с именем
+const prizeIcon = rank <= 4 ? '<span class="prize-icon" title="🎁 Приз!">🎁</span>' : '';
+
+item.innerHTML = `
+<div class="rank ${rankClass}">${rankEmoji}</div>
+<div class="player-info">
+<div class="player-name">
+${player.name}
+${prizeIcon}
+</div>
+<div class="player-scores">
+<span class="category-badge badge-quiz">🧠 ${player.quiz}</span>
+<span class="category-badge badge-music">🎵 ${player.music}</span>
+<span class="category-badge badge-timeline">📅 ${player.timeline}</span>
+</div>
+</div>
+<div class="total-score">${player.total}</div>
+`;
+container.appendChild(item);
+});
+
+// Конфетти для топ-4 при первом открытии
+if (filtered.length >= 4 && filter === '') {
+setTimeout(() => createConfetti(), 500);
+}
+}
+
+function filterLeaderboard(query) {
+renderLeaderboard(query);
+}
+
+// ============================================
+// КАРТОЧКА ИГРОКА
+// ============================================
+function showPlayerCard(playerName) {
+const player = playersData.find(p => p.name === playerName);
+if (!player) return;
+
+const container = document.getElementById('player-card-container');
+container.innerHTML = '';
+
+const sorted = [...playersData].sort((a, b) => b.total - a.total);
+const playerRank = sorted.findIndex(p => p.name === playerName) + 1;
+const isWinner = player.total >= 40;
+const isTop4 = playerRank <= 4;
+
+const card = document.createElement('div');
+card.className = `card ${isWinner ? 'winner' : ''}`;
+
+const quizPercent = Math.round((player.quiz / MAX_QUIZ) * 100);
+const musicPercent = Math.round((player.music / MAX_MUSIC) * 100);
+const timelinePercent = Math.round((player.timeline / MAX_TIMELINE) * 100);
+const totalPercent = Math.round((player.total / MAX_TOTAL) * 100);
+
+let message = '';
+if (player.total >= 50) message = '🏆 Откуда ты знаешь, что аквапарк — это первое место в хронологии событий?';
+else if (player.total >= 40) message = '⭐ Отличный результат! Ты настоящий эксперт!';
+else if (player.total >= 30) message = '👍 Хорошая игра! Ты хорошо знаешь именинницу!';
+else message = '💪 Неплохо! Есть куда расти!';
+
+// Блок с призом для топ-4
+const prizeBlock = isTop4 ? `
+<div class="prize-notice">
+<div class="prize-notice-icon">🎁🎉🏆</div>
+<div class="prize-notice-text">
+${playerRank === 1 ? '🥇 1 МЕСТО' : playerRank === 2 ? '🥈 2 МЕСТО' : playerRank === 3 ? '🥉 3 МЕСТО' : '🎖️ 4 МЕСТО'}<br>
+<span style="font-size: 12px; opacity: 0.8;">Тебя ждёт приз на вечеринке!</span>
+</div>
+</div>
+` : '';
+
+// Блок с информацией о вопросах
+const infoNotice = `
+<div class="info-notice">
+<div class="info-notice-title">
+Есть вопросы?
+</div>
+<div class="info-notice-text">
+Если тебе интересно, почему тот или иной ответ правильный, или хочешь узнать больше деталей — 
+<strong>именинница с радостью ответит на все вопросы при встрече!</strong>
+</div>
+</div>
+`;
+
+card.innerHTML = `
+<div class="card-avatar">${isTop4 ? '🏆' : player.total >= 40 ? '🌟' : '🎮'}</div>
+<div class="card-name">${player.name}</div>
+${isTop4 ? `<div style="font-size: 18px; color: var(--primary); margin-bottom: 10px;">${playerRank === 1 ? '🥇' : playerRank === 2 ? '🥈' : playerRank === 3 ? '🥉' : '🎖️'} ${playerRank} место</div>` : ''}
+<div class="card-stats">
+<div class="stat">
+<div class="stat-label">🧠 Викторина</div>
+<div class="stat-value">${player.quiz} <small style="font-size:12px">(${quizPercent}%)</small></div>
+<div class="stat-bar"><div class="stat-bar-fill bar-quiz" style="width: 0%" data-width="${quizPercent}%"></div></div>
+</div>
+<div class="stat">
+<div class="stat-label">🎵 Музыка</div>
+<div class="stat-value">${player.music} <small style="font-size:12px">(${musicPercent}%)</small></div>
+<div class="stat-bar"><div class="stat-bar-fill bar-music" style="width: 0%" data-width="${musicPercent}%"></div></div>
+</div>
+<div class="stat">
+<div class="stat-label">📅 Хронология</div>
+<div class="stat-value">${player.timeline} <small style="font-size:12px">(${timelinePercent}%)</small></div>
+<div class="stat-bar"><div class="stat-bar-fill bar-timeline" style="width: 0%" data-width="${timelinePercent}%"></div></div>
+</div>
+</div>
+<div style="font-size: 32px; font-weight: 800; color: var(--primary); margin: 20px 0;">
+ИТОГО: ${player.total} / 100
+</div>
+<div class="stat-bar" style="height: 10px; margin: 15px 0;">
+<div class="stat-bar-fill" style="width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent-purple));" data-width="${totalPercent}%"></div>
+</div>
+<div class="card-message">${message}</div>
+${prizeBlock}
+${infoNotice}
+`;
+
+container.appendChild(card);
+showSection('player-card-section');
+
+// Анимация полосок прогресса
+setTimeout(() => {
+document.querySelectorAll('.stat-bar-fill').forEach(bar => {
+bar.style.width = bar.getAttribute('data-width');
+});
+}, 100);
+
+// Конфетти для топ-4 КАЖДЫЙ РАЗ при открытии
+if (isTop4) {
+setTimeout(() => createConfetti(), 300);
+}
+}
+
+// ============================================
+// КАТЕГОРИИ
+// ============================================
+function renderCategories() {
+// Викторина
+const quizSorted = [...playersData].sort((a, b) => b.quiz - a.quiz).slice(0, 3);
+document.getElementById('quiz-winners').innerHTML = quizSorted.map((p, i) => 
+`<div class="winner-item">
+<span style="font-size: 20px; margin-right: 10px;">${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</span>
+<span><strong>${p.name}</strong> — ${p.quiz} баллов</span>
+</div>`
+).join('');
+
+// Музыка
+const musicSorted = [...playersData].sort((a, b) => b.music - a.music).slice(0, 3);
+document.getElementById('music-winners').innerHTML = musicSorted.map((p, i) => 
+`<div class="winner-item">
+<span style="font-size: 20px; margin-right: 10px;">${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</span>
+<span><strong>${p.name}</strong> — ${p.music} баллов</span>
+</div>`
+).join('');
+
+// Хронология
+const timelineSorted = [...playersData].sort((a, b) => b.timeline - a.timeline).slice(0, 3);
+document.getElementById('timeline-winners').innerHTML = timelineSorted.map((p, i) => 
+`<div class="winner-item">
+<span style="font-size: 20px; margin-right: 10px;">${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}</span>
+<span><strong>${p.name}</strong> — ${p.timeline} баллов</span>
+</div>`
+).join('');
+}
+
+// ============================================
+// КОНФЕТТИ
+// ============================================
+function createConfetti() {
+const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#9c27b0', '#2196f3'];
+for (let i = 0; i < 100; i++) {
+const confetti = document.createElement('div');
+confetti.className = 'confetti';
+confetti.style.left = Math.random() * 100 + 'vw';
+confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+confetti.style.animationDelay = Math.random() * 2 + 's';
+document.body.appendChild(confetti);
+setTimeout(() => confetti.remove(), 5000);
+}
+}
+</script>
+</body>
+</html>
